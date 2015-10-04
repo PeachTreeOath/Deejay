@@ -5,6 +5,7 @@ using UnityEngine.Networking;
 public class BobsledSC : NetworkBehaviour {
 
 	public float speed;
+	public float accel;
 	private Rigidbody2D rBody;
 
 	// Use this for initialization
@@ -20,7 +21,8 @@ public class BobsledSC : NetworkBehaviour {
 			foreach (PlayerSC player in players) {
 				totalInput += player.pollDirection () * 1 / players.Length;
 			}
-			rBody.velocity = new Vector2 (totalInput * speed, 0);
+			rBody.velocity = new Vector2 (totalInput * speed, rBody.velocity.y);
+			rBody.AddForce(new Vector2(0, accel));
 		}
 	}
 }

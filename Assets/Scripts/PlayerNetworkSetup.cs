@@ -6,7 +6,7 @@ public class PlayerNetworkSetup : NetworkBehaviour {
     
 	// Use this for initialization
 	void Start() {
-		transform.SetParent(GameObject.Find("Bobsled").transform);
+		transform.SetParent(GameObject.Find("BobsledA").transform);
 	}
 	
 	// Update is called once per frame
