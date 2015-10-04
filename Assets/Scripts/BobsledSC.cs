@@ -1,7 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.Networking;
 
-public class BobsledSC : MonoBehaviour {
+public class BobsledSC : NetworkBehaviour {
 
 	public float speed;
 	private Rigidbody2D rBody;
@@ -13,8 +14,13 @@ public class BobsledSC : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		float h = Input.GetAxis("Horizontal");
-		float v = Input.GetAxis("Vertical");
-		rBody.velocity = new Vector2 (speed * h, speed * v);
+		if (isServer) {
+			float totalInput = 0;
+			PlayerSC[] players = GetComponentsInChildren<PlayerSC> ();
+			foreach (PlayerSC player in players) {
+				totalInput += player.pollDirection () * 1 / players.Length;
+			}
+			rBody.velocity = new Vector2 (totalInput * speed, 0);
+		}
 	}
 }

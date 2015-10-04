@@ -9,16 +9,20 @@ public class PlayerSyncPosition : NetworkBehaviour {
     public Transform mTransform;
     public float lerpRate = 15;
     
-	
+	void Update()
+	{
+		LerpPosition();
+	}
+
 	void FixedUpdate () {
 		TransmitPosition ();
-		LerpPosition();
 	}
 
     void LerpPosition()
     {
         if (!isLocalPlayer)
         {
+			//Debug.Log (syncPos);
             mTransform.position = Vector2.Lerp(mTransform.position, syncPos, Time.deltaTime * lerpRate);
         }
     }
