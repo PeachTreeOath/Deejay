@@ -6,6 +6,7 @@ public class GameMgrSC : NetworkBehaviour {
 
 	// Use this for initialization
 	void Start () {
+		NetworkServer.SpawnObjects ();
 		bool firstTeam = true;
 		GameObject[] objs = GameObject.FindGameObjectsWithTag ("Player");
 		shuffle (objs);

@@ -8,6 +8,10 @@ public class NPCSyncPosition : NetworkBehaviour {
 	private Vector2 syncPos;
 	public Transform mTransform;
 	public float lerpRate = 15;
+	public override void OnStartServer()
+	{
+		Debug.Log ("WHY");
+	}
 
 	void Update()
 	{
