@@ -8,9 +8,15 @@ public class PlayerSC : NetworkBehaviour {
 	private float hInput;
 	[SyncVar]
 	public int team = 0;
+	[SyncVar]
+	public int pos = 0;
 	public float headMoveDist;
 	public string playerName;
 	private bool teamSet = false;
+
+	public Sprite sprTeamA;
+	public Sprite sprTeamB;
+	public Sprite sprSelf;
 
 	// Use this for initialization
 	void Start () {
@@ -19,18 +25,25 @@ public class PlayerSC : NetworkBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if (teamSet == false && team != 0) {
+		if (teamSet == false && team != 0 && pos != 0) {
 			string teamName;
 			if(team == 1)
 			{
 				teamName = "BobsledA";
+				GetComponent<SpriteRenderer>().sprite = sprTeamA;
 			}
 			else
 			{
 				teamName = "BobsledB";
+				GetComponent<SpriteRenderer>().sprite = sprTeamB;
 			}
 			transform.parent = GameObject.Find(teamName).transform;
+			transform.position = GameObject.Find("SpawnPoint" + pos).GetComponent<Transform>().position;
 			teamSet = true;
+
+			if (isLocalPlayer) {
+				GetComponent<SpriteRenderer>().sprite = sprSelf;
+			}
 		}
 
 		if (isLocalPlayer) {

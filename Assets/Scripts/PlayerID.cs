@@ -21,7 +21,7 @@ public class PlayerID : NetworkBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if (mTransform.name == "" || mTransform.name == "headGPF(Clone)") {
+		if (mTransform.name == "" || mTransform.name == "playerPF(Clone)") {
 			SetIdentity();
 		}
 	}
