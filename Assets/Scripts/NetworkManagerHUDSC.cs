@@ -11,7 +11,7 @@ namespace UnityEngine.Networking
 		[SerializeField] public int offsetX;
 		[SerializeField] public int offsetY;
 		private string playerName = "Name";
-		private LobbyPlayerSC lobbyPlayer;
+		private NameHolderSC lobbyPlayer;
 
 		// Runtime variable
 		bool showServer = false;
@@ -19,8 +19,7 @@ namespace UnityEngine.Networking
 		void Awake()
 		{
 			manager = GetComponent<NetworkLobbyManager>();
-			NetworkLobbyPlayer pf = manager.lobbyPlayerPrefab;
-			lobbyPlayer = pf.GetComponent<LobbyPlayerSC>();
+			lobbyPlayer = GameObject.Find ("NameHolder").GetComponent<NameHolderSC> ();
 		}
 
 		void Update()
@@ -60,13 +59,14 @@ namespace UnityEngine.Networking
 			int xpos = 10 + offsetX;
 			int ypos = 10 + offsetY;
 			int spacing = 24;
-
+			/*
 			GUI.Label(new Rect(xpos, ypos, 300, 20), "Name:");
 			playerName = GUI.TextField(new Rect(xpos+100, ypos, 100, 20), playerName);
 			if (playerName.Length > 16) {
 				playerName = playerName.Substring(0,16);
 			}
 			lobbyPlayer.playerName = playerName;
+*/
 			ypos += spacing;
 
 			if (!NetworkClient.active && !NetworkServer.active && manager.matchMaker == null)
@@ -147,7 +147,7 @@ namespace UnityEngine.Networking
 						{
 							if (GUI.Button(new Rect(xpos, ypos, 200, 20), "Create Internet Match"))
 							{
-								manager.matchMaker.CreateMatch(manager.matchName, manager.matchSize, true, "", manager.OnMatchCreate);
+								manager.matchMaker.CreateMatch(manager.matchName, 8, true, "", manager.OnMatchCreate);
 							}
 							ypos += spacing;
 

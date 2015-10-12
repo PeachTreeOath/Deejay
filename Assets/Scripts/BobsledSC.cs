@@ -33,7 +33,6 @@ public class BobsledSC : NetworkBehaviour {
 		if (isServer && started) {
 			if (!collidable && Time.time > lastCollideTime + 1) {
 				collidable = true;
-				GetComponent<SpriteRenderer>().sortingLayerName = "Bobsleds";
 			}
 
 			float totalInput = 0;
@@ -52,8 +51,16 @@ public class BobsledSC : NetworkBehaviour {
 			}
 		}
 
-		if (isClient && !collidable) {
-			Flash();
+		if (isClient) {
+			if(!collidable)
+			{
+				Flash();
+			}
+			else
+			{
+				GetComponent<SpriteRenderer>().sortingLayerName = "Bobsleds";
+			}
+
 		}
 
 	}

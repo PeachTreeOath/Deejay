@@ -13,8 +13,6 @@ public class GameMgrSC : NetworkBehaviour {
 	void Start () {
 		Invoke ("SetTeams", 1f);
 		Invoke ("StartSleds", 2f);
-
-		GameObject.Find("NetworkManager").GetComponent<NetworkManagerHUDSC> ().showGUI = false;
 	}
 	
 	// Update is called once per frame
@@ -22,6 +20,11 @@ public class GameMgrSC : NetworkBehaviour {
 		if (!victory) {
 			checkVictory ();
 		}
+	}
+
+	private void resetScene()
+	{
+		GameObject.Find ("NetworkManager").GetComponent<NetworkLobbyManager> ().ServerChangeScene ("Menu");
 	}
 
 	private void checkVictory()
@@ -41,6 +44,7 @@ public class GameMgrSC : NetworkBehaviour {
 					GameObject.Find("GuiTextManager").GetComponent<GUITextSC>().victory = 2;
 				}
 				victory = true;
+				Invoke ("resetScene", 5f);
 			}
 		}
 	}
@@ -56,6 +60,8 @@ public class GameMgrSC : NetworkBehaviour {
 
 	private void SetTeams()
 	{
+		GameObject.Find("NetworkManager").GetComponent<NetworkManagerHUDSC> ().showGUI = false;
+
 		bool firstTeam = true;
 		int position = 1;
 		int teamApos = 1;
@@ -88,7 +94,7 @@ public class GameMgrSC : NetworkBehaviour {
 
 				}
 				teamApos++;
-				*/
+*/
 			}
 			else
 			{
@@ -111,7 +117,7 @@ public class GameMgrSC : NetworkBehaviour {
 					
 				}
 				teamBpos++;
-				*/
+*/
 			}
 			player.pos = position;
 

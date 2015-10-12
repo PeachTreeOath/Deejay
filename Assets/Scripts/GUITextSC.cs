@@ -25,7 +25,7 @@ public class GUITextSC : NetworkBehaviour {
 	private Text text8;
 
 	// Use this for initialization
-	void Start () {/*
+	void Start () {
 		text1 = GameObject.Find ("NameA1").GetComponent<Text> ();
 		text2 = GameObject.Find ("NameA2").GetComponent<Text> ();
 		text3 = GameObject.Find ("NameA3").GetComponent<Text> ();
@@ -34,12 +34,12 @@ public class GUITextSC : NetworkBehaviour {
 		text6 = GameObject.Find ("NameB2").GetComponent<Text> ();
 		text7 = GameObject.Find ("NameB3").GetComponent<Text> ();
 		text8 = GameObject.Find ("NameB4").GetComponent<Text> ();
-		*/
+
+		GameObject.Find("NetworkManager").GetComponent<NetworkManagerHUDSC> ().showGUI = false;
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		/*
 		text1.text = name1;
 		text2.text = name2;
 		text3.text = name3;
@@ -48,7 +48,7 @@ public class GUITextSC : NetworkBehaviour {
 		text6.text = name6;
 		text7.text = name7;
 		text8.text = name8;
-*/
+
 		if (victory != 0) {
 			if(victory == 1)
 			{

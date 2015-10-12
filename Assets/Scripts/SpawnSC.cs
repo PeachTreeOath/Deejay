@@ -25,7 +25,7 @@ public class SpawnSC : NetworkBehaviour {
 		float sectionSize = (finishY - startY) / numSections;
 
 		for (int section = 0; section < numSections; section++) {
-			for (int i = 0; i < 5 + section * 5; i++) {
+			for (int i = 0; i < 5 + section * 6; i++) {
 				float x = Random.Range(-5,5);
 				float y = Random.Range(startY + sectionSize * section, startY + sectionSize * (section+1));
 				Vector3 pos = new Vector3(x,y,0);

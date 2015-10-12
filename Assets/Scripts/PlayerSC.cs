@@ -20,7 +20,10 @@ public class PlayerSC : NetworkBehaviour {
 
 	// Use this for initialization
 	void Start () {
-	
+		if (isLocalPlayer) {
+			string name = GameObject.Find ("NameHolder").GetComponent<NameHolderSC> ().playerName;
+			playerName = name;
+		}
 	}
 	
 	// Update is called once per frame
