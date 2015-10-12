@@ -13,6 +13,8 @@ public class GameMgrSC : NetworkBehaviour {
 	void Start () {
 		Invoke ("SetTeams", 1f);
 		Invoke ("StartSleds", 2f);
+
+		GameObject.Find("NetworkManager").GetComponent<NetworkManagerHUDSC> ().showGUI = false;
 	}
 	
 	// Update is called once per frame
@@ -32,11 +34,11 @@ public class GameMgrSC : NetworkBehaviour {
 			{
 				if(bobsled.name == "BobsledA")
 				{
-					GameObject.Find("VictoryManager").GetComponent<VictorySC>().victory = 1;
+					GameObject.Find("GuiTextManager").GetComponent<GUITextSC>().victory = 1;
 				}
 				else if(bobsled.name == "BobsledB")
 				{
-					GameObject.Find("VictoryManager").GetComponent<VictorySC>().victory = 2;
+					GameObject.Find("GuiTextManager").GetComponent<GUITextSC>().victory = 2;
 				}
 				victory = true;
 			}
@@ -56,6 +58,8 @@ public class GameMgrSC : NetworkBehaviour {
 	{
 		bool firstTeam = true;
 		int position = 1;
+		int teamApos = 1;
+		int teamBpos = 1;
 
 		GameObject[] objs = GameObject.FindGameObjectsWithTag ("Player");
 		shuffle (objs);
@@ -66,11 +70,51 @@ public class GameMgrSC : NetworkBehaviour {
 			if(firstTeam)
 			{
 				player.team = 1;
+				/*
+				switch(teamApos)
+				{
+					case 1:
+						GameObject.Find("GuiTextManager").GetComponent<GUITextSC>().name1 = player.playerName;
+						break;
+					case 2:
+						GameObject.Find("GuiTextManager").GetComponent<GUITextSC>().name2 = player.playerName;
+						break;
+					case 3:
+						GameObject.Find("GuiTextManager").GetComponent<GUITextSC>().name3 = player.playerName;
+						break;
+					case 4:
+						GameObject.Find("GuiTextManager").GetComponent<GUITextSC>().name4 = player.playerName;
+						break;
+
+				}
+				teamApos++;
+				*/
 			}
-			else{
+			else
+			{
 				player.team = 2;
+				/*
+				switch(teamBpos)
+				{
+				case 1:
+					GameObject.Find("GuiTextManager").GetComponent<GUITextSC>().name5 = player.playerName;
+					break;
+				case 2:
+					GameObject.Find("GuiTextManager").GetComponent<GUITextSC>().name6 = player.playerName;
+					break;
+				case 3:
+					GameObject.Find("GuiTextManager").GetComponent<GUITextSC>().name7 = player.playerName;
+					break;
+				case 4:
+					GameObject.Find("GuiTextManager").GetComponent<GUITextSC>().name8 = player.playerName;
+					break;
+					
+				}
+				teamBpos++;
+				*/
 			}
 			player.pos = position;
+
 			firstTeam = !firstTeam;
 			if(firstTeam)
 			{
