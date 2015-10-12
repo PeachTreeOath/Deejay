@@ -9,7 +9,7 @@ public class CamSC : MonoBehaviour {
 	}
 	
 	// Update is called once per frame
-	void Update () {
+	void LateUpdate () {
 		transform.position = new Vector3 (0, transform.position.y, transform.position.z);
 	}
 }

@@ -14,13 +14,23 @@ public class SpawnSC : NetworkBehaviour {
 	public GameObject pf6;
 	public GameObject pf7;
 
+	public int numBG;
+	public int numSections;
+
 	// Use this for initialization
-	void Awake () {
-		for (int i = 0; i < 5; i++) {
-			float x = Random.Range(-5,5);
-			float y = Random.Range(5,15);
-			Vector3 pos = new Vector3(x,y,0);
-			generateObject (pos);
+	void Start () {
+		float startY = 5;
+		float finishY = ((numBG - 1) * 7.5f) - 5f;
+		GameObject.Find ("GameManager").GetComponent<GameMgrSC> ().finishLine = finishY;
+		float sectionSize = (finishY - startY) / numSections;
+
+		for (int section = 0; section < numSections; section++) {
+			for (int i = 0; i < 5 + section * 5; i++) {
+				float x = Random.Range(-5,5);
+				float y = Random.Range(startY + sectionSize * section, startY + sectionSize * (section+1));
+				Vector3 pos = new Vector3(x,y,0);
+				generateObject (pos);
+			}
 		}
 	}
 	
@@ -57,7 +67,8 @@ public class SpawnSC : NetworkBehaviour {
 			break;
 		}
 
-		GameObject obj = (GameObject)GameObject.Instantiate(pf,pos, Quaternion.identity);
+		GameObject obj = (GameObject)GameObject.Instantiate(pf, pos, Quaternion.identity);
 		NetworkServer.Spawn (obj);
 	}
+
 }
